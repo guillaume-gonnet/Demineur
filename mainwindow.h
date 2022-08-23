@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAction>
 #include "box.h"
 
 QT_BEGIN_NAMESPACE
@@ -16,12 +17,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void boxClicked();
+
 private:
     Ui::MainWindow *ui;
     void createGrid();
     std::vector<std::vector<Box*>> boxList;
-    int nbCol;
-    int nbLine;
-    int nbMines;
+    int m_nbCol;
+    int m_nbLine;
+    int m_nbMines;
+    QAction *actionClickBox = nullptr;
 };
 #endif // MAINWINDOW_H

@@ -9,10 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    nbCol=8;
-    nbLine=8;
-    nbMines=10;
+    m_nbCol=8;
+    m_nbLine=8;
+    m_nbMines=10;
     createGrid();
+
 }
 
 MainWindow::~MainWindow()
@@ -22,21 +23,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::createGrid()
 {
-    for(int i=0;i<nbLine;i++)
+    for(int i=0;i<m_nbLine;i++)
     {
         std::vector<Box*> tmp;
 
-        for(int j=0;j<nbCol;j++)
+        for(int j=0;j<m_nbCol;j++)
         {
-            tmp.push_back(new Box());
+            Box *box = new Box();
+            QString str = "Box%1%2";
+            str.arg(i).arg(j);
+            box->setObjectName(str);
+            tmp.push_back(box);
         }
         boxList.push_back(tmp);
     }
-    for(int i=0;i<nbLine;i++)
+    for(int i=0;i<m_nbLine;i++)
     {
-        for(int j=0;j<nbCol;j++)
+        for(int j=0;j<m_nbCol;j++)
         {
-              ui->gridLayout->addWidget(boxList[i][j],i,j);
+            Box *box = boxList[i][j];
+            ui->gridLayout->addWidget(box,i,j);
+            actionClickBox = new QAction(tr("&click box"), this);
+            //connect(actionClickBox,&QAction::triggered,this, &Box::isCheckedEmpty);
+
+
         }
     }
 }

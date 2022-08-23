@@ -1,18 +1,20 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include <QPushButton>
+#include <QToolButton>
 
-class Box : public QPushButton
+class Box : public QToolButton
 {
 public:
     Box();
     enum BoxState {unchecked, checkedEmpty, CheckedMine};
-    enum BoxSolution {empty, mine};
+
+public slots:
+    void isCheckedEmpty();
 
 private:
-    BoxState state;
-    BoxSolution solution;
+    BoxState m_state;
+    void isCheckedEmpty(Box *box, bool b);
 };
 
 #endif // BOX_H

@@ -58,5 +58,10 @@
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="mainwindow.cpp" line="46"/>
+        <source>&amp;click box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
