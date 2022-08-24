@@ -7,14 +7,17 @@ class Box : public QToolButton
 {
 public:
     Box();
-    enum BoxState {unchecked, checkedEmpty, CheckedMine};
+    void setMine();
 
 public slots:
-    void isCheckedEmpty();
+    void clickRightBox();
+    void clickLeftBox();
 
 private:
-    BoxState m_state;
-    void isCheckedEmpty(Box *box, bool b);
+    bool m_isChecked;
+    bool m_isMine;
+    bool m_isFlag;
+    void checkNextBox();
 };
 
 #endif // BOX_H

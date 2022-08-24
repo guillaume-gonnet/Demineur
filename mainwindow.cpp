@@ -31,22 +31,25 @@ void MainWindow::createGrid()
         {
             Box *box = new Box();
             QString str = "Box%1%2";
-            str.arg(i).arg(j);
-            box->setObjectName(str);
+//            str.arg(i).arg(j);
+//            box->setObjectName(str);
             tmp.push_back(box);
         }
-        boxList.push_back(tmp);
+        m_boxList.push_back(tmp);
     }
     for(int i=0;i<m_nbLine;i++)
     {
         for(int j=0;j<m_nbCol;j++)
         {
-            Box *box = boxList[i][j];
+            Box *box = m_boxList[i][j];
             ui->gridLayout->addWidget(box,i,j);
-            actionClickBox = new QAction(tr("&click box"), this);
-            //connect(actionClickBox,&QAction::triggered,this, &Box::isCheckedEmpty);
-
-
         }
     }
+    createMines(m_boxList,m_nbMines);
+}
+
+void MainWindow::createMines(std::vector<std::vector<Box*>> boxList, int nbMines)
+{
+    //TODO: generate random Mines
+    boxList[0][0]->setMine();
 }

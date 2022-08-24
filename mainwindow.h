@@ -23,10 +23,11 @@ signals:
 private:
     Ui::MainWindow *ui;
     void createGrid();
-    std::vector<std::vector<Box*>> boxList;
+    std::vector<std::vector<Box*>> m_boxList;
     int m_nbCol;
     int m_nbLine;
     int m_nbMines;
     QAction *actionClickBox = nullptr;
+    void createMines(std::vector<std::vector<Box*>> boxList, int nbMines);
 };
 #endif // MAINWINDOW_H
