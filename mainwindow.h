@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QAction>
-#include "box.h"
+#include "boxgrid.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,17 +18,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-signals:
-    void boxClicked();
-
 private:
     Ui::MainWindow *ui;
+    BoxGrid *boxgridnew;
     void createGrid();
-    std::vector<std::vector<Box*>> m_boxList;
-    int m_nbCol;
-    int m_nbLine;
-    int m_nbMines;
-    QAction *actionClickBox = nullptr;
-    void createMines(std::vector<std::vector<Box*>> boxList, int nbMines);
+
+
 };
 #endif // MAINWINDOW_H

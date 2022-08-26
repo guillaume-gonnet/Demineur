@@ -23,6 +23,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         box.h
         box.cpp
+        boxgrid.h
+        boxgrid.cpp
         resources.qrc
         ${TS_FILES}
 )

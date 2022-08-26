@@ -44,9 +44,17 @@ void Box::clickRightBox()
 void Box::checkNextBox()
 {
 //TODO: to be implemented
+
+
 }
 
 void Box::setMine()
 {
     m_isMine=true;
+}
+
+void Box::setCoordinates(int x, int y)
+{
+    m_col = x;
+    m_line = y;
 }

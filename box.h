@@ -3,11 +3,13 @@
 
 #include <QToolButton>
 
+
 class Box : public QToolButton
 {
 public:
     Box();
     void setMine();
+    void setCoordinates(int, int);
 
 public slots:
     void clickRightBox();
@@ -17,6 +19,8 @@ private:
     bool m_isChecked;
     bool m_isMine;
     bool m_isFlag;
+    int m_col;
+    int m_line;
     void checkNextBox();
 };
 
