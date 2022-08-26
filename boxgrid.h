@@ -3,14 +3,18 @@
 
 #include "box.h"
 
-class BoxGrid
+class BoxGrid : public QObject
 {
 public:
     BoxGrid();
     Box* getBox(int x,int y) {return m_boxList[x][y];};
     int getNbLine() {return m_nbLine;};
     int getNbCol() {return m_nbCol;};
+    int getNbMinesAround(Box*);
     void discoverBox();
+
+public slots:
+    void clickLeftBox(Box*);
 
 private:
     void createBoxGrid();

@@ -10,42 +10,6 @@ Box::Box()
                         "background-color: grey"
                         "padding: 1px"
                         "}");
-    connect(this, &QToolButton::clicked, this, &Box::clickLeftBox);
-}
-
-
-void Box::clickLeftBox()
-{
-    if(m_isMine)
-    {
-        this->setStyleSheet("QToolButton {"
-                            "background-color: red"
-                            "}");
-
-        QMessageBox message;
-        message.setText("Perdu!");
-        message.exec();
-        //TODO: implement final screen Replay?
-
-    } else {
-        this->setStyleSheet("QToolButton {"
-                            "background-color: dark_grey"
-                            "}");
-        checkNextBox();
-    }
-}
-
-
-void Box::clickRightBox()
-{
-//TODO: to be implemented
-}
-
-void Box::checkNextBox()
-{
-//TODO: to be implemented
-
-
 }
 
 void Box::setMine()
@@ -53,8 +17,21 @@ void Box::setMine()
     m_isMine=true;
 }
 
-void Box::setCoordinates(int x, int y)
+void Box::setCoordinates(int x1, int y1)
 {
-    m_col = x;
-    m_line = y;
+    m_coordinate.x=x1;
+    m_coordinate.y=y1;
+}
+
+void Box::changeDisplay(QColor color, int nbMine)
+{
+    if(color == "red") //lost
+    {
+        this->setStyleSheet("QToolButton {"
+                            "background-color: red"
+                            "}");
+    } else {
+        this->setText(QString::number(nbMine));
+        this->setStyleSheet("QToolButton {background-color: grey; color: white;}");
+    }
 }
