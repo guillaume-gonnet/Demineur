@@ -3,10 +3,14 @@
 
 #include <QToolButton>
 #include <QColor>
+#include <QMouseEvent>
+#include <qevent.h>
 
 
 class Box : public QToolButton
 {
+    Q_OBJECT
+
 public:
     Box();
     struct Point{
@@ -30,6 +34,14 @@ private:
     bool m_isFlag;
 
     Point m_coordinate;
+
+private slots:
+    void mousePressEvent(QMouseEvent *e);
+
+signals:
+    void rightClicked();
+    void leftClicked();
+
 };
 
 #endif // BOX_H

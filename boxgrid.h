@@ -2,9 +2,13 @@
 #define BOXGRID_H
 
 #include "box.h"
+#include <QObject>
 
-class BoxGrid : public QObject
+
+class BoxGrid: public QObject
 {
+    Q_OBJECT
+
 public:
     BoxGrid();
     Box* getBox(int x,int y) {return m_boxList[x][y];};
@@ -15,6 +19,7 @@ public:
 
 public slots:
     void clickLeftBox(Box*);
+    void clickRightBox(Box*);
 
 private:
     void createBoxGrid();

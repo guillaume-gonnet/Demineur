@@ -35,3 +35,11 @@ void Box::changeDisplay(QColor color, int nbMine)
         this->setStyleSheet("QToolButton {background-color: grey; color: white;}");
     }
 }
+
+void Box::mousePressEvent(QMouseEvent *e)
+{
+    if(e->button()==Qt::RightButton)
+        emit rightClicked();
+    if(e->button()==Qt::LeftButton)
+        emit leftClicked();
+}

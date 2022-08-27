@@ -26,13 +26,12 @@ void BoxGrid::createBoxGrid()
             Box *box = new Box();
             box->setCoordinates(i,j);
             tmp.push_back(box);
-            Box::connect(box, &QToolButton::clicked, this, [this, box] {clickLeftBox(box);});
+            Box::connect(box, &Box::leftClicked, this, [this, box] {clickLeftBox(box);});
+            Box::connect(box, &Box::rightClicked, this, [this, box] {clickRightBox(box);});
         }
         m_boxList.push_back(tmp);
     }
 }
-
-
 
 void BoxGrid::createMines(QVector<QVector<Box*>> boxList, int nbMines)
 {
@@ -70,6 +69,14 @@ void BoxGrid::clickLeftBox(Box* box)
         box->changeDisplay(QColor("black"), getNbMinesAround(box));
         //discoverBox();
     }
+}
+
+void BoxGrid::clickRightBox(Box *box)
+{
+    box->setStyleSheet("QToolButton {"
+                       "background-color: dark_grey;"
+                       "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
+                       "}");
 }
 
 int BoxGrid::getNbMinesAround(Box* box)
