@@ -1,11 +1,15 @@
 #include "boxgrid.h"
 #include <QMessageBox>
+#include <QRandomGenerator>
+#include <QDateTime>
+
+QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
 BoxGrid::BoxGrid()
 {
     m_nbLine=5;
-    m_nbCol=5;
-    m_nbMines=1;
+    m_nbCol=m_nbLine;
+    m_nbMines=3;
     createBoxGrid();
     createMines(m_boxList,m_nbMines);
 }
@@ -15,7 +19,7 @@ void BoxGrid::createBoxGrid()
 {
     for(int i=0;i<m_nbLine;i++)
     {
-        std::vector<Box*> tmp;
+        QVector<Box*> tmp;
 
         for(int j=0;j<m_nbCol;j++)
         {
@@ -30,10 +34,22 @@ void BoxGrid::createBoxGrid()
 
 
 
-void BoxGrid::createMines(std::vector<std::vector<Box*>> boxList, int nbMines)
+void BoxGrid::createMines(QVector<QVector<Box*>> boxList, int nbMines)
 {
-    //TODO: generate random Mines
-    boxList[3][2]->setMine();
+    QVector<Box::Point> mineGrid;
+    while(mineGrid.size()<m_nbMines)
+    {
+        Box::Point p;
+        p.x= gene.bounded(m_nbCol);
+        p.y = gene.bounded(m_nbLine);
+        if(std::find(mineGrid.constBegin(), mineGrid.constEnd(), p) == mineGrid.constEnd())
+            mineGrid.push_back(p);
+    }
+    for(Box::Point p : mineGrid)
+    {
+        Box *box = getBox(p.x,p.y);
+        box->setMine();
+    }
 }
 
 void BoxGrid::clickLeftBox(Box* box)
@@ -59,23 +75,23 @@ void BoxGrid::clickLeftBox(Box* box)
 int BoxGrid::getNbMinesAround(Box* box)
 {
     int counter =0;
-    Box::Coordinates coordinate = box->getCoordinates();
+    Box::Point coordinate = box->getCoordinates();
     QVector<Box*> listBoxes;
     if(coordinate.x-1>=0 && coordinate.y-1>=0)
         listBoxes.push_back(getBox(coordinate.x-1,coordinate.y-1));
     if(coordinate.x-1>=0)
         listBoxes.push_back(getBox(coordinate.x-1,coordinate.y));
-    if(coordinate.x-1>=0 && coordinate.y+1<=m_nbLine)
+    if(coordinate.x-1>=0 && coordinate.y+1<m_nbLine)
         listBoxes.push_back(getBox(coordinate.x-1,coordinate.y+1));
     if(coordinate.y-1>=0)
         listBoxes.push_back(getBox(coordinate.x,coordinate.y-1));
-    if(coordinate.y+1<=m_nbLine)
+    if(coordinate.y+1<m_nbLine)
         listBoxes.push_back(getBox(coordinate.x,coordinate.y+1));
-    if(coordinate.x+1<=m_nbCol && coordinate.y-1>=0)
+    if(coordinate.x+1<m_nbCol && coordinate.y-1>=0)
         listBoxes.push_back(getBox(coordinate.x+1,coordinate.y-1));
-    if(coordinate.x+1<=m_nbCol)
+    if(coordinate.x+1<m_nbCol)
         listBoxes.push_back(getBox(coordinate.x+1,coordinate.y));
-    if(coordinate.x+1<=m_nbCol && coordinate.y+1<=m_nbLine)
+    if(coordinate.x+1<m_nbCol && coordinate.y+1<m_nbLine)
         listBoxes.push_back(getBox(coordinate.x+1,coordinate.y+1));
 
     for(auto b : listBoxes)

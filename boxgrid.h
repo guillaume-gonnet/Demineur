@@ -18,11 +18,11 @@ public slots:
 
 private:
     void createBoxGrid();
-    std::vector<std::vector<Box*>> m_boxList;
+    QVector<QVector<Box*>> m_boxList;
     int m_nbCol;
     int m_nbLine;
     int m_nbMines;
-    void createMines(std::vector<std::vector<Box*>> boxList, int nbMines);
+    void createMines(QVector<QVector<Box*>> boxList, int nbMines);
 };
 
 #endif // BOXGRID_H
