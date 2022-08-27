@@ -7,9 +7,9 @@ QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
 BoxGrid::BoxGrid()
 {
-    m_nbLine=5;
-    m_nbCol=m_nbLine;
-    m_nbMines=3;
+    m_nbLine=7;
+    m_nbCol=7;
+    m_nbMines=5;
     createBoxGrid();
     createMines(m_boxList,m_nbMines);
 }
@@ -68,7 +68,7 @@ void BoxGrid::clickLeftBox(Box* box)
                             "}");
 
         box->changeDisplay(QColor("black"), getNbMinesAround(box));
-        discoverBox();
+        //discoverBox();
     }
 }
 
@@ -102,7 +102,8 @@ int BoxGrid::getNbMinesAround(Box* box)
     return counter;
 }
 
-void BoxGrid::discoverBox()
-{
-//TODO: check all box nearby with 0 mine around
-}
+//void BoxGrid::discoverBox(Box *box)
+//{
+//    //if(getNbMinesAround(box)==0)
+
+//}
