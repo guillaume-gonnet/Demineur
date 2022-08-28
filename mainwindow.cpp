@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    boxgridnew = new BoxGrid();
+    m_boxGrid = new BoxGrid();
     createGrid();
-    connect(boxgridnew,&BoxGrid::gameEnded,this, &MainWindow::endGame);
+
 
 }
 
@@ -22,23 +22,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::createGrid()
 {
-    for(int i=0;i<boxgridnew->getNbCol();i++)
+    for(int i=0;i<m_boxGrid->getNbCol();i++)
     {
-        for(int j=0;j<boxgridnew->getNbLine();j++)
+        for(int j=0;j<m_boxGrid->getNbLine();j++)
         {
-            Box* box = boxgridnew->getBox(i,j);
+            Box* box = m_boxGrid->getBox(i,j);
             ui->gridLayout->addWidget(box,i,j);
         }
     }
+    connect(m_boxGrid,&BoxGrid::gameEnded,this, &MainWindow::endGame);
 }
 
 void MainWindow::endGame(QString msg)
 {
-    QMessageBox message;
+    QMessageBox msgBox;
     if(msg=="win")
-        message.setText("Gagne!");
+        msgBox.setText("You win!");
     if(msg=="lost")
-        message.setText("Perdu!");
-    message.exec();
+        msgBox.setText("You lost!");
+    msgBox.setInformativeText("Do you want to replay?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    int resp = msgBox.exec();
+    switch (resp)
+    {
+    case QMessageBox::Yes :
+        delete m_boxGrid;
+        m_boxGrid=new BoxGrid();
+        createGrid();
+        break;
+    case QMessageBox::No :
+        qApp->exit();
+    }
 }
 

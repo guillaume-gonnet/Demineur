@@ -20,10 +20,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    BoxGrid *boxgridnew;
+    BoxGrid *m_boxGrid;
     void createGrid();
     void endGame(QString);
-
-
 };
 #endif // MAINWINDOW_H
