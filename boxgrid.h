@@ -27,7 +27,12 @@ private:
     int m_nbCol;
     int m_nbLine;
     int m_nbMines;
+    int m_nbFlag;
+    int m_remainBox;
     void createMines(QVector<QVector<Box*>> boxList, int nbMines);
+
+signals:
+    void gameEnded(QString);
 };
 
 #endif // BOXGRID_H

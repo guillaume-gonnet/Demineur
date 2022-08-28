@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-
+#include <QMessageBox>
 #include <iostream>
 #include "boxgrid.h"
 
@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     boxgridnew = new BoxGrid();
     createGrid();
+    connect(boxgridnew,&BoxGrid::gameEnded,this, &MainWindow::endGame);
 
 }
 
@@ -29,5 +30,15 @@ void MainWindow::createGrid()
             ui->gridLayout->addWidget(box,i,j);
         }
     }
+}
+
+void MainWindow::endGame(QString msg)
+{
+    QMessageBox message;
+    if(msg=="win")
+        message.setText("Gagne!");
+    if(msg=="lost")
+        message.setText("Perdu!");
+    message.exec();
 }
 

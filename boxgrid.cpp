@@ -7,9 +7,10 @@ QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
 BoxGrid::BoxGrid()
 {
-    m_nbLine=7;
-    m_nbCol=7;
-    m_nbMines=5;
+    m_nbLine=3;
+    m_nbCol=3;
+    m_nbMines=1;
+    m_remainBox = m_nbLine * m_nbCol;
     createBoxGrid();
     createMines(m_boxList,m_nbMines);
 }
@@ -56,10 +57,7 @@ void BoxGrid::clickLeftBox(Box* box)
     if(box->isMine())
     {
         box->changeDisplay(QColor("red"),0);
-        QMessageBox message;
-        message.setText("Perdu!");
-        message.exec();
-        //TODO: implement final screen Replay?
+        emit gameEnded("lost");
 
     } else {
         box->setStyleSheet("QToolButton {"
@@ -69,6 +67,8 @@ void BoxGrid::clickLeftBox(Box* box)
         box->changeDisplay(QColor("black"), getNbMinesAround(box));
         //discoverBox();
     }
+    if(--m_remainBox==0)
+        emit gameEnded("win");
 }
 
 void BoxGrid::clickRightBox(Box *box)
@@ -77,6 +77,8 @@ void BoxGrid::clickRightBox(Box *box)
                        "background-color: dark_grey;"
                        "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
                        "}");
+    if(--m_remainBox==0 && ++m_nbFlag==m_nbMines)
+        emit gameEnded("win");
 }
 
 int BoxGrid::getNbMinesAround(Box* box)

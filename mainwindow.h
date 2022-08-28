@@ -22,6 +22,7 @@ private:
     Ui::MainWindow *ui;
     BoxGrid *boxgridnew;
     void createGrid();
+    void endGame(QString);
 
 
 };
