@@ -5,16 +5,11 @@ Box::Box()
 {
     m_isChecked=false;
     m_isMine=false;
-    m_isFlag=false;
+    m_hasFlag=false;
     this->setStyleSheet("QToolButton {"
                         "background-color: grey"
                         "padding: 1px"
                         "}");
-}
-
-void Box::setMine()
-{
-    m_isMine=true;
 }
 
 void Box::setCoordinates(int x1, int y1)

@@ -21,17 +21,20 @@ public:
                 return (x == a.x && y == a.y);
             }
     };
-    void setMine();
-    bool isMine() {return m_isMine;};
+    void setCheck(bool b) {m_isChecked=b;};
+    bool isChecked() {return m_isChecked;};
+    void setMine() {m_isMine=true;};
+    bool hasMine() {return m_isMine;};
+    void setFlag(bool b) {m_hasFlag = b;};
+    bool hasFlag() {return m_hasFlag;};
     void setCoordinates(int, int);
     Point getCoordinates() {return m_coordinate;};
     void changeDisplay(QColor color, int nbMine);
 
-
 private:
     bool m_isChecked;
     bool m_isMine;
-    bool m_isFlag;
+    bool m_hasFlag;
 
     Point m_coordinate;
 

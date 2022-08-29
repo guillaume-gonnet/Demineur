@@ -15,7 +15,6 @@ public:
     int getNbLine() {return m_nbLine;};
     int getNbCol() {return m_nbCol;};
     int getNbMinesAround(Box*);
-    //void discoverBox(Box*);
 
 public slots:
     void clickLeftBox(Box*);

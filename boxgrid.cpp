@@ -7,9 +7,9 @@ QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
 BoxGrid::BoxGrid()
 {
-    m_nbLine=3;
-    m_nbCol=3;
-    m_nbMines=1;
+    m_nbLine=5;
+    m_nbCol=5;
+    m_nbMines=5;
     m_remainBox = m_nbLine * m_nbCol;
     createBoxGrid();
     createMines(m_boxList,m_nbMines);
@@ -54,7 +54,11 @@ void BoxGrid::createMines(QVector<QVector<Box*>> boxList, int nbMines)
 
 void BoxGrid::clickLeftBox(Box* box)
 {
-    if(box->isMine())
+    if(box->isChecked())
+        return;
+
+    box->setCheck(true);
+    if(box->hasMine())
     {
         box->changeDisplay(QColor("red"),0);
         emit gameEnded("lost");
@@ -73,12 +77,25 @@ void BoxGrid::clickLeftBox(Box* box)
 
 void BoxGrid::clickRightBox(Box *box)
 {
-    box->setStyleSheet("QToolButton {"
-                       "background-color: dark_grey;"
-                       "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
-                       "}");
-    if(--m_remainBox==0 && ++m_nbFlag==m_nbMines)
-        emit gameEnded("win");
+    if(box->hasFlag())
+    {
+        box->setFlag(false);
+        box->setCheck(false);
+        box->setStyleSheet("QToolButton {"
+                           "background-color: grey;"
+                           "}");
+        --m_nbFlag;
+        ++m_remainBox;
+    } else {
+        box->setFlag(true);
+        box->setCheck(true);
+        box->setStyleSheet("QToolButton {"
+                           "background-color: dark_grey;"
+                           "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
+                           "}");
+        if(--m_remainBox==0 && ++m_nbFlag==m_nbMines)
+            emit gameEnded("win");
+    }
 }
 
 int BoxGrid::getNbMinesAround(Box* box)
@@ -105,14 +122,19 @@ int BoxGrid::getNbMinesAround(Box* box)
 
     for(auto b : listBoxes)
     {
-        if(b->isMine())
+        if(b->hasMine())
             counter++;
+    }
+    if(counter == 0)
+        clickLeftBox(box);
+
+ //if 0 mine, then explore around boxes and click if 0 mine as well
+    if(counter==0 && !listBoxes.isEmpty())
+    {
+        for(auto b : listBoxes)
+        {
+            clickLeftBox(b);
+        }
     }
     return counter;
 }
-
-//void BoxGrid::discoverBox(Box *box)
-//{
-//    //if(getNbMinesAround(box)==0)
-
-//}

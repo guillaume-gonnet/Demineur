@@ -11,8 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     m_boxGrid = new BoxGrid();
     createGrid();
-
-
 }
 
 MainWindow::~MainWindow()
