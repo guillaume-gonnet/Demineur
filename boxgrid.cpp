@@ -69,18 +69,27 @@ void BoxGrid::clickLeftBox(Box* box)
         return;
 
     box->setCheck(true);
-    if(box->hasMine())
+
+    if(box->hasMine()) //lost
     {
-        box->changeDisplay(QColor("red"),0);
+        for(auto boxArr : m_boxList)
+        {
+            for(auto box : boxArr)
+            {
+                if(box->hasMine())
+                    box->changeDisplay(QColor("red"),0);
+            }
+        }
+
         emit gameEnded("lost");
 
     } else {
+        box->setCheckable(false);
         box->setStyleSheet("QToolButton {"
                             "background-color: dark_grey"
                             "}");
 
         box->changeDisplay(QColor("black"), getNbMinesAround(box));
-        //discoverBox();
     }
     if(--m_remainBox==0)
         emit gameEnded("win");
@@ -88,12 +97,12 @@ void BoxGrid::clickLeftBox(Box* box)
 
 void BoxGrid::clickRightBox(Box *box)
 {
-    if(box->hasFlag())
+    if(box->hasFlag()) //remove flag
     {
         box->setFlag(false);
         box->setCheck(false);
         box->setStyleSheet("QToolButton {"
-                           "background-color: grey;"
+                           "background-color: silver;"
                            "}");
         --m_nbFlag;
         ++m_remainBox;
@@ -101,7 +110,7 @@ void BoxGrid::clickRightBox(Box *box)
         box->setFlag(true);
         box->setCheck(true);
         box->setStyleSheet("QToolButton {"
-                           "background-color: dark_grey;"
+                           "background-color: grey;"
                            "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
                            "}");
         if(--m_remainBox==0 && ++m_nbFlag==m_nbMines)
@@ -148,9 +157,4 @@ int BoxGrid::getNbMinesAround(Box* box)
         }
     }
     return counter;
-}
-
-void BoxGrid::endGame()
-{
-
 }

@@ -30,7 +30,6 @@ private:
     int m_nbFlag;
     int m_remainBox;
     void createMines(QVector<QVector<Box*>> boxList, int nbMines);
-    void endGame();
 
 signals:
     void gameEnded(QString);

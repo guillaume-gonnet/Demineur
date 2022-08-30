@@ -6,10 +6,14 @@ Box::Box()
     m_isChecked=false;
     m_isMine=false;
     m_hasFlag=false;
-    this->setStyleSheet("QToolButton {"
-                        "background-color: grey"
-                        "padding: 1px"
-                        "}");
+    this->setStyleSheet("QToolButton {\
+                        background-color: silver;\
+                        border-style: none;\
+                        padding: 2px;\
+                        width: 25px;\
+                        height: 25px;\
+                        border-radius: 5px;\
+                        }");
 }
 
 void Box::setCoordinates(int x1, int y1)
@@ -22,9 +26,10 @@ void Box::changeDisplay(QColor color, int nbMine)
 {
     if(color == "red") //lost
     {
-        this->setStyleSheet("QToolButton {"
-                            "background-color: red"
-                            "}");
+        this->setStyleSheet("QToolButton {\
+                            background-color: red;\
+                            border-image: url(:/image/image/mine.png) 0 0 0 0 stretch stretch;\
+                            }");
     } else {
         this->setText(QString::number(nbMine));
         this->setStyleSheet("QToolButton {background-color: grey; color: white;}");
