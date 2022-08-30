@@ -11,6 +11,7 @@ class BoxGrid: public QObject
 
 public:
     BoxGrid();
+    ~BoxGrid();
     Box* getBox(int x,int y) {return m_boxList[x][y];};
     int getNbLine() {return m_nbLine;};
     int getNbCol() {return m_nbCol;};
@@ -29,6 +30,7 @@ private:
     int m_nbFlag;
     int m_remainBox;
     void createMines(QVector<QVector<Box*>> boxList, int nbMines);
+    void endGame();
 
 signals:
     void gameEnded(QString);

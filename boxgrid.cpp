@@ -15,6 +15,17 @@ BoxGrid::BoxGrid()
     createMines(m_boxList,m_nbMines);
 }
 
+BoxGrid::~BoxGrid()
+{
+    for(auto arrBox : m_boxList)
+    {
+        for(auto box : arrBox)
+        {
+            delete box;
+        }
+    }
+}
+
 
 void BoxGrid::createBoxGrid()
 {
@@ -137,4 +148,9 @@ int BoxGrid::getNbMinesAround(Box* box)
         }
     }
     return counter;
+}
+
+void BoxGrid::endGame()
+{
+
 }
