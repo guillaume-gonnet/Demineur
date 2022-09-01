@@ -21,9 +21,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::createGrid()
 {
-    for(int i=0;i<m_boxGrid->getNbCol();i++)
+    for(int i=0;i<m_boxGrid->getHeight();i++)
     {
-        for(int j=0;j<m_boxGrid->getNbLine();j++)
+        for(int j=0;j<m_boxGrid->getWide();j++)
         {
             Box* box = m_boxGrid->getBox(i,j);
             ui->gridLayout->addWidget(box,i,j);
@@ -55,6 +55,7 @@ void MainWindow::endGame(QString msg)
 }
 
 
+
 void MainWindow::on_actionNew_triggered()
 {
     if(m_boxGrid)
@@ -73,7 +74,15 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionGrid_Size_triggered()
 {
     OptionDialog optDialog;
+    OptionDialog *p_optDialog = &optDialog;
+    connect(p_optDialog,&OptionDialog::accepted,this,&MainWindow::updateOptions);
     optDialog.setModal(true);
     optDialog.exec();
 }
 
+void MainWindow::updateOptions(int wide, int height, int mines)
+{
+    delete m_boxGrid;
+    m_boxGrid=new BoxGrid(wide,height,mines);
+    createGrid();
+}

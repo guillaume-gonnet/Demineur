@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>40</y>
+     <x>100</x>
+     <y>30</y>
      <width>173</width>
      <height>18</height>
     </rect>
@@ -32,8 +32,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>200</y>
+     <x>100</x>
+     <y>190</y>
      <width>177</width>
      <height>26</height>
     </rect>
@@ -49,77 +49,65 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>80</y>
-     <width>175</width>
-     <height>29</height>
+     <y>60</y>
+     <width>201</width>
+     <height>121</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLineEdit" name="lineEditWide">
-      <property name="text">
-       <string>Nb boxes wide</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineEditWide">
+        <property name="text">
+         <string>Nb boxes wide</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBoxWide">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBoxWide">
-      <property name="minimum">
-       <number>3</number>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>120</y>
-     <width>175</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QLineEdit" name="lineEditHeight">
-      <property name="text">
-       <string>Nb boxes height</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEditHeight">
+        <property name="text">
+         <string>Nb boxes height</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBoxHeight">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBoxHeight">
-      <property name="minimum">
-       <number>3</number>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>150</y>
-     <width>175</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
-    <item>
-     <widget class="QLineEdit" name="lineEditNbMines">
-      <property name="text">
-       <string>Nb mines</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="spinBoxNbMines">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLineEdit" name="lineEditNbMines">
+        <property name="text">
+         <string>Nb mines</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBoxNbMines">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

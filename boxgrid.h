@@ -11,13 +11,14 @@ class BoxGrid: public QObject
 
 public:
     BoxGrid();
+    BoxGrid(int wide, int height, int mines);
     ~BoxGrid();
     Box* getBox(int x,int y) {return m_boxList[x][y];};
-    int getNbLine() {return m_nbLine;};
-    void setNbLine(int nb) {m_nbLine=nb;};
-    int getNbCol() {return m_nbCol;};
-    void setNbCol(int nb) {m_nbCol=nb;};
-    void setNbMines(int nb) {m_nbMines=nb;};
+    int getHeight() {return m_height;};
+    void setHeight(int nb) {m_height=nb;};
+    int getWide() {return m_wide;};
+    void setWide(int nb) {m_wide=nb;};
+    void setNbMines(int nb) {m_mines=nb;};
     int getNbMinesAround(Box*);
 
 public slots:
@@ -27,9 +28,9 @@ public slots:
 private:
     void createBoxGrid();
     QVector<QVector<Box*>> m_boxList;
-    int m_nbCol;
-    int m_nbLine;
-    int m_nbMines;
+    int m_wide;
+    int m_height;
+    int m_mines;
     int m_remainBox;
     int m_remainFlag;
     void createMines(QVector<QVector<Box*>> boxList, int nbMines);

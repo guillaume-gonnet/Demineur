@@ -77,17 +77,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="optiondialog.ui" line="61"/>
+        <location filename="optiondialog.ui" line="63"/>
         <source>Nb boxes wide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="optiondialog.ui" line="87"/>
+        <location filename="optiondialog.ui" line="81"/>
         <source>Nb boxes height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="optiondialog.ui" line="113"/>
+        <location filename="optiondialog.ui" line="99"/>
         <source>Nb mines</source>
         <translation type="unfinished"></translation>
     </message>

@@ -20,7 +20,6 @@ public:
 private slots:
     void on_actionNew_triggered();
     void on_actionExit_triggered();
-
     void on_actionGrid_Size_triggered();
 
 private:
@@ -28,5 +27,6 @@ private:
     BoxGrid *m_boxGrid;
     void createGrid();
     void endGame(QString);
+    void updateOptions(int wide, int height, int mines);
 };
 #endif // MAINWINDOW_H

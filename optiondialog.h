@@ -17,7 +17,6 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
-
     void on_buttonBox_rejected();
 
 private:
@@ -25,6 +24,9 @@ private:
     int m_wide;
     int m_height;
     int m_mines;
+
+signals:
+    void accepted(int, int, int);
 };
 
 #endif // OPTIONDIALOG_H
