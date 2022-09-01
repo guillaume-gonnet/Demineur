@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "boxgrid.h"
+#include "optiondialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,5 +52,28 @@ void MainWindow::endGame(QString msg)
     case QMessageBox::No :
         qApp->exit();
     }
+}
+
+
+void MainWindow::on_actionNew_triggered()
+{
+    if(m_boxGrid)
+        delete m_boxGrid;
+    m_boxGrid=new BoxGrid();
+    createGrid();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    qApp->exit();
+}
+
+
+void MainWindow::on_actionGrid_Size_triggered()
+{
+    OptionDialog optDialog;
+    optDialog.setModal(true);
+    optDialog.exec();
 }
 

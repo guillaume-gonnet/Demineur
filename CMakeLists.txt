@@ -25,6 +25,9 @@ set(PROJECT_SOURCES
         box.cpp
         boxgrid.h
         boxgrid.cpp
+        optiondialog.h
+        optiondialog.cpp
+        optiondialog.ui
         resources.qrc
         ${TS_FILES}
 )

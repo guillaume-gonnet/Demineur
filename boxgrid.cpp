@@ -11,6 +11,7 @@ BoxGrid::BoxGrid()
     m_nbCol=5;
     m_nbMines=5;
     m_remainBox = m_nbLine * m_nbCol;
+    m_remainFlag = m_nbMines;
     createBoxGrid();
     createMines(m_boxList,m_nbMines);
 }
@@ -104,8 +105,11 @@ void BoxGrid::clickRightBox(Box *box)
         box->setStyleSheet("QToolButton {"
                            "background-color: silver;"
                            "}");
-        --m_nbFlag;
+        ++m_remainFlag;
         ++m_remainBox;
+    } else if (box->isChecked() || m_remainFlag==0)
+    {
+        return;
     } else {
         box->setFlag(true);
         box->setCheck(true);
@@ -113,7 +117,8 @@ void BoxGrid::clickRightBox(Box *box)
                            "background-color: grey;"
                            "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
                            "}");
-        if(--m_remainBox==0 && ++m_nbFlag==m_nbMines)
+        --m_remainFlag;
+        if(--m_remainBox==0)
             emit gameEnded("win");
     }
 }
