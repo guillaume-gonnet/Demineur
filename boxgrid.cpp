@@ -9,7 +9,7 @@ BoxGrid::BoxGrid(const int wide, const int height, const int mines): m_wide(wide
 {
     m_remainBox = m_height * m_wide;
     createBoxGrid();
-    createMines(m_boxList,m_mines);
+    createMines();
 }
 
 BoxGrid::~BoxGrid()
@@ -42,7 +42,7 @@ void BoxGrid::createBoxGrid()
     }
 }
 
-void BoxGrid::createMines(QVector<QVector<Box*>> boxList, int nbMines)
+void BoxGrid::createMines()
 {
     QVector<Box::Point> mineGrid;
     while(mineGrid.size()<m_mines)

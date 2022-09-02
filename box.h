@@ -21,15 +21,15 @@ public:
                 return (x == a.x && y == a.y);
             }
     };
-    void setCheck(bool b) {m_isChecked=b;};
+    void setCheck(const bool b) {m_isChecked=b;};
     bool isChecked() {return m_isChecked;};
     void setMine() {m_isMine=true;};
     bool hasMine() {return m_isMine;};
-    void setFlag(bool b) {m_hasFlag = b;};
+    void setFlag(const bool b) {m_hasFlag = b;};
     bool hasFlag() {return m_hasFlag;};
-    void setCoordinates(int, int);
+    void setCoordinates(const int, const int);
     Point getCoordinates() {return m_coordinate;};
-    void changeDisplay(QColor color, int nbMine);
+    void changeDisplay(const QColor color, const int nbMine);
 
 private:
     bool m_isChecked;

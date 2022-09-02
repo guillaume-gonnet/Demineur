@@ -16,13 +16,13 @@ Box::Box()
                         }");
 }
 
-void Box::setCoordinates(int x1, int y1)
+void Box::setCoordinates(const int x1, const int y1)
 {
     m_coordinate.x=x1;
     m_coordinate.y=y1;
 }
 
-void Box::changeDisplay(QColor color, int nbMine)
+void Box::changeDisplay(const QColor color, const int nbMine)
 {
     if(color == "red") //lost
     {

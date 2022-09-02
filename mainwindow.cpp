@@ -77,7 +77,7 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionGrid_Size_triggered()
 {
-    OptionDialog optDialog;
+    OptionDialog optDialog(this, m_boxGrid->getWide(),m_boxGrid->getHeight(),m_boxGrid->getNbMines());
     OptionDialog *p_optDialog = &optDialog;
     connect(p_optDialog,&OptionDialog::accepted,this,&MainWindow::updateOptions);
     optDialog.setModal(true);
