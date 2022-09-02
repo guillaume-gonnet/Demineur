@@ -32,7 +32,7 @@ void MainWindow::createGrid()
     connect(m_boxGrid,&BoxGrid::gameEnded,this, &MainWindow::endGame);
 }
 
-void MainWindow::endGame(QString msg)
+void MainWindow::endGame(const QString msg)
 {
     QMessageBox msgBox;
     if(msg=="win")
@@ -41,19 +41,23 @@ void MainWindow::endGame(QString msg)
         msgBox.setText("You lost!");
     msgBox.setInformativeText("Do you want to replay?");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    int resp = msgBox.exec();
+    const int resp = msgBox.exec();
     switch (resp)
     {
     case QMessageBox::Yes :
+    {
+        const int wide = m_boxGrid->getWide();
+        const int height = m_boxGrid->getHeight();
+        const int mines = m_boxGrid->getNbMines();
         delete m_boxGrid;
-        m_boxGrid=new BoxGrid();
+        m_boxGrid=new BoxGrid(wide,height,mines);
         createGrid();
         break;
+    }
     case QMessageBox::No :
         qApp->exit();
     }
 }
-
 
 
 void MainWindow::on_actionNew_triggered()
@@ -80,7 +84,7 @@ void MainWindow::on_actionGrid_Size_triggered()
     optDialog.exec();
 }
 
-void MainWindow::updateOptions(int wide, int height, int mines)
+void MainWindow::updateOptions(const int wide, const int height, const int mines)
 {
     delete m_boxGrid;
     m_boxGrid=new BoxGrid(wide,height,mines);

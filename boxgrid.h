@@ -10,14 +10,14 @@ class BoxGrid: public QObject
     Q_OBJECT
 
 public:
-    BoxGrid();
-    BoxGrid(int wide, int height, int mines);
+    BoxGrid(int wide = 5, int height = 5, int mines = 5);
     ~BoxGrid();
     Box* getBox(int x,int y) {return m_boxList[x][y];};
     int getHeight() {return m_height;};
     void setHeight(int nb) {m_height=nb;};
     int getWide() {return m_wide;};
     void setWide(int nb) {m_wide=nb;};
+    int getNbMines() {return m_mines;}
     void setNbMines(int nb) {m_mines=nb;};
     int getNbMinesAround(Box*);
 

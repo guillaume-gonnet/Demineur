@@ -5,14 +5,7 @@
 
 QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
-BoxGrid::BoxGrid(): m_height(5),m_wide(5),m_mines(5),m_remainFlag(m_mines)
-{
-    m_remainBox = m_height * m_wide;
-    createBoxGrid();
-    createMines(m_boxList,m_mines);
-}
-
-BoxGrid::BoxGrid(int wide, int height, int mines): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
+BoxGrid::BoxGrid(const int wide, const int height, const int mines): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
 {
     m_remainBox = m_height * m_wide;
     createBoxGrid();
