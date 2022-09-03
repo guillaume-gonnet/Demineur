@@ -62,6 +62,7 @@ void BoxGrid::createMines()
 
 void BoxGrid::clickLeftBox(Box* box)
 {
+
     if(box->isChecked())
         return;
 

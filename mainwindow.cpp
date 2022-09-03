@@ -4,6 +4,7 @@
 #include <iostream>
 #include "boxgrid.h"
 #include "optiondialog.h"
+#include "settings.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -90,3 +91,10 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
     m_boxGrid=new BoxGrid(wide,height,mines);
     createGrid();
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+    MySettings mySettings;
+    mySettings.saveSettings(*m_boxGrid);
+}
+

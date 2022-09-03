@@ -28,6 +28,8 @@ set(PROJECT_SOURCES
         optiondialog.h
         optiondialog.cpp
         optiondialog.ui
+        settings.h
+        settings.cpp
         resources.qrc
         ${TS_FILES}
 )

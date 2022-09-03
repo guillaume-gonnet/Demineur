@@ -22,6 +22,8 @@ private slots:
     void on_actionExit_triggered();
     void on_actionGrid_Size_triggered();
 
+    void on_actionSave_triggered();
+
 private:
     Ui::MainWindow *ui;
     BoxGrid *m_boxGrid;
