@@ -47,8 +47,8 @@
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionLoad"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuOption">
@@ -73,13 +73,16 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="actionLoad">
    <property name="icon">
     <iconset theme="document-open">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>Load last game</string>
+   </property>
+   <property name="toolTip">
+    <string>Load</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>

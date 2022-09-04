@@ -2,14 +2,23 @@
 #include <QMessageBox>
 #include <QRandomGenerator>
 #include <QDateTime>
+#include "mysettings.h"
 
 QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
-BoxGrid::BoxGrid(const int wide, const int height, const int mines): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
+BoxGrid::BoxGrid(const int wide, const int height, const int mines, const bool save): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
 {
-    m_remainBox = m_height * m_wide;
-    createBoxGrid();
-    createMines();
+    if(!save)
+    {
+        m_remainBox = m_height * m_wide;
+        createBoxGrid();
+        createMines();
+    } else {
+        m_remainBox = m_height * m_wide;
+        createBoxGrid();
+        loadBoxes();
+    }
+
 }
 
 BoxGrid::~BoxGrid()
@@ -56,7 +65,46 @@ void BoxGrid::createMines()
     for(Box::Point p : mineGrid)
     {
         Box *box = getBox(p.x,p.y);
-        box->setMine();
+        box->setMine(true);
+    }
+}
+
+void BoxGrid::loadBoxes()
+{
+    MySettings mySettings;
+    for(auto boxArr : m_boxList)
+    {
+        for(auto box : boxArr)
+        {
+            mySettings.loadBox(box);
+        }
+    }
+    for(auto boxArr : m_boxList)
+    {
+        for(auto box : boxArr)
+        {
+            if(box->hasFlag())
+            {
+                box->setFlag(true);
+                box->setCheck(true);
+                box->setStyleSheet("QToolButton {"
+                                   "background-color: grey;"
+                                   "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
+                                   "}");
+                --m_remainFlag;
+                --m_remainBox;
+            }
+            if(box->isChecked() && !box->hasFlag())
+            {
+                box->setCheckable(false);
+                box->setStyleSheet("QToolButton {"
+                                   "background-color: dark_grey"
+                                   "}");
+
+                box->changeDisplay(QColor("black"), getNbMinesAround(box));
+                --m_remainBox;
+            }
+        }
     }
 }
 
@@ -122,7 +170,7 @@ void BoxGrid::clickRightBox(Box *box)
 
 int BoxGrid::getNbMinesAround(Box* box)
 {
-    int counter =0;
+    int counter = 0;
     Box::Point coordinate = box->getCoordinates();
     QVector<Box*> listBoxes;
     if(coordinate.x-1>=0 && coordinate.y-1>=0)

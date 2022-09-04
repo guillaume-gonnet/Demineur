@@ -21,8 +21,9 @@ private slots:
     void on_actionNew_triggered();
     void on_actionExit_triggered();
     void on_actionGrid_Size_triggered();
-
     void on_actionSave_triggered();
+
+    void on_actionLoad_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -23,7 +23,7 @@ public:
     };
     void setCheck(const bool b) {m_isChecked=b;};
     bool isChecked() {return m_isChecked;};
-    void setMine() {m_isMine=true;};
+    void setMine(const bool b) {m_isMine=b;};
     bool hasMine() {return m_isMine;};
     void setFlag(const bool b) {m_hasFlag = b;};
     bool hasFlag() {return m_hasFlag;};

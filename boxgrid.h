@@ -10,7 +10,7 @@ class BoxGrid: public QObject
     Q_OBJECT
 
 public:
-    BoxGrid(int wide = 5, int height = 5, int mines = 5);
+    BoxGrid(int wide = 5, int height = 5, int mines = 5, const bool save=false);
     ~BoxGrid();
     Box* getBox(const int x,const int y) {return m_boxList[x][y];};
     int getHeight() {return m_height;};
@@ -34,6 +34,7 @@ private:
     int m_remainBox;
     int m_remainFlag;
     void createMines();
+    void loadBoxes();
 
 signals:
     void gameEnded(const QString);

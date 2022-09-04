@@ -2,7 +2,7 @@
 #define MYSETTINGS_H
 
 #include <QSettings>
-#include "box.h"
+
 #include "boxgrid.h"
 
 class MySettings
@@ -10,7 +10,8 @@ class MySettings
 public:
     MySettings();
     void saveSettings(BoxGrid &boxgrid);
-    void loadSettings();
+    BoxGrid* loadSettings();
+    void loadBox(Box *box);
 
 private:
 };

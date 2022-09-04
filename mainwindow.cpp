@@ -4,7 +4,7 @@
 #include <iostream>
 #include "boxgrid.h"
 #include "optiondialog.h"
-#include "settings.h"
+#include "mysettings.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -96,5 +96,14 @@ void MainWindow::on_actionSave_triggered()
 {
     MySettings mySettings;
     mySettings.saveSettings(*m_boxGrid);
+}
+
+
+void MainWindow::on_actionLoad_triggered()
+{
+    delete m_boxGrid;
+    MySettings mySettings;
+    m_boxGrid = mySettings.loadSettings();
+    createGrid();
 }
 
