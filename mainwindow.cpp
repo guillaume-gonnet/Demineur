@@ -6,6 +6,8 @@
 #include "optiondialog.h"
 #include "mysettings.h"
 #include <QLabel>
+#include <QTimer>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,14 +15,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     m_boxGrid = new BoxGrid();
+    timer = new QTimer(this);
+    time = QTime(0,0);
     createGrid();
     createStatusBar();
-    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
 }
 
 MainWindow::~MainWindow()
 {
     delete labelMines;
+    delete labelTimer;
     delete ui;
 }
 
@@ -40,19 +45,32 @@ void MainWindow::createGrid()
 void MainWindow::createStatusBar()
 {
     labelMines = new QLabel(this);
-    updateStatusBar();
+    labelTimer = new QLabel(this);
+    updateStatusMines();
     ui->statusbar->addPermanentWidget(labelMines,1);
-    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateStatusTimer);
+    timer->start(1000);
+    updateStatusTimer();
+    ui->statusbar->addPermanentWidget(labelTimer,1);
 }
 
-void MainWindow::updateStatusBar()
+void MainWindow::updateStatusMines()
 {
     QString str = QString("Nb mines: %1/%2").arg(m_boxGrid->getNbFlags()).arg(m_boxGrid->getNbMines());
     labelMines->setText(str);
 }
 
+void MainWindow::updateStatusTimer()
+{
+    time = time.addSecs(1);
+    labelTimer->setText(time.toString("hh : mm : ss"));
+}
+
 void MainWindow::endGame(const QString msg)
 {
+    timer->stop();
     QMessageBox msgBox;
     if(msg=="win")
         msgBox.setText("You win!");
@@ -70,9 +88,12 @@ void MainWindow::endGame(const QString msg)
         const int mines = m_boxGrid->getNbMines();
         delete m_boxGrid;
         m_boxGrid=new BoxGrid(wide,height,mines);
-        connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+        connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
         createGrid();
-        updateStatusBar();
+        updateStatusMines();
+        time = QTime(0,0);
+        timer->start();
+        updateStatusTimer();
         break;
     }
     case QMessageBox::No :
@@ -106,7 +127,7 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
 {
     delete m_boxGrid;
     m_boxGrid=new BoxGrid(wide,height,mines);
-    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
     createGrid();
 }
 
@@ -121,6 +142,6 @@ void MainWindow::on_actionLoad_triggered()
     delete m_boxGrid;
     MySettings mySettings;
     m_boxGrid = mySettings.loadSettings();
-    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
     createGrid();
 }

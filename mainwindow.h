@@ -5,6 +5,8 @@
 #include <QAction>
 #include "boxgrid.h"
 #include <QLabel>
+#include <QTime>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,11 +31,15 @@ private:
     Ui::MainWindow *ui;
     BoxGrid *m_boxGrid;
     QLabel *labelMines;
+    QLabel *labelTimer;
+    QTime time;
+    QTimer *timer;
     void createGrid();
     void endGame(QString);
     void updateOptions(int wide, int height, int mines);
     void createStatusBar();
-    void updateStatusBar();
+    void updateStatusMines();
+    void updateStatusTimer();
 
 };
 #endif // MAINWINDOW_H
