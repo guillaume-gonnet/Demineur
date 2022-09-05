@@ -34,5 +34,6 @@ private:
     void updateOptions(int wide, int height, int mines);
     void createStatusBar();
     void updateStatusBar();
+
 };
 #endif // MAINWINDOW_H

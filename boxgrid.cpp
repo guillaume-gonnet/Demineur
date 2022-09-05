@@ -47,6 +47,7 @@ void BoxGrid::createBoxGrid()
         }
         m_boxList.push_back(tmp);
     }
+    emit statusBarUpdate();
 }
 
 void BoxGrid::createMines()
@@ -91,6 +92,7 @@ void BoxGrid::loadBoxes()
                                    "}");
                 --m_remainFlag;
                 --m_remainBox;
+                emit statusBarUpdate();
             }
             if(box->isChecked() && !box->hasFlag())
             {

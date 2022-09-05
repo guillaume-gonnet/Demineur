@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_boxGrid = new BoxGrid();
     createGrid();
     createStatusBar();
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
 }
 
 MainWindow::~MainWindow()
@@ -69,14 +70,15 @@ void MainWindow::endGame(const QString msg)
         const int mines = m_boxGrid->getNbMines();
         delete m_boxGrid;
         m_boxGrid=new BoxGrid(wide,height,mines);
+        connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
         createGrid();
+        updateStatusBar();
         break;
     }
     case QMessageBox::No :
         qApp->exit();
     }
 }
-
 
 void MainWindow::on_actionNew_triggered()
 {
@@ -86,12 +88,10 @@ void MainWindow::on_actionNew_triggered()
     createGrid();
 }
 
-
 void MainWindow::on_actionExit_triggered()
 {
     qApp->exit();
 }
-
 
 void MainWindow::on_actionGrid_Size_triggered()
 {
@@ -106,9 +106,9 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
 {
     delete m_boxGrid;
     m_boxGrid=new BoxGrid(wide,height,mines);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
     createGrid();
 }
-
 
 void MainWindow::on_actionSave_triggered()
 {
@@ -116,12 +116,11 @@ void MainWindow::on_actionSave_triggered()
     mySettings.saveSettings(*m_boxGrid);
 }
 
-
 void MainWindow::on_actionLoad_triggered()
 {
     delete m_boxGrid;
     MySettings mySettings;
     m_boxGrid = mySettings.loadSettings();
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
     createGrid();
 }
-
