@@ -19,6 +19,7 @@ public:
     void setWide(const int nb) {m_wide=nb;};
     int getNbMines() {return m_mines;}
     void setNbMines(const int nb) {m_mines=nb;};
+    int getNbFlags() {return m_mines-m_remainFlag;};
     int getNbMinesAround(Box*);
 
 public slots:
@@ -38,6 +39,7 @@ private:
 
 signals:
     void gameEnded(const QString);
+    void statusBarUpdate();
 };
 
 #endif // BOXGRID_H

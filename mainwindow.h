@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QAction>
 #include "boxgrid.h"
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,14 +23,16 @@ private slots:
     void on_actionExit_triggered();
     void on_actionGrid_Size_triggered();
     void on_actionSave_triggered();
-
     void on_actionLoad_triggered();
 
 private:
     Ui::MainWindow *ui;
     BoxGrid *m_boxGrid;
+    QLabel *labelMines;
     void createGrid();
     void endGame(QString);
     void updateOptions(int wide, int height, int mines);
+    void createStatusBar();
+    void updateStatusBar();
 };
 #endif // MAINWINDOW_H

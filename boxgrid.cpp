@@ -8,14 +8,12 @@ QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
 BoxGrid::BoxGrid(const int wide, const int height, const int mines, const bool save): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
 {
+    m_remainBox = m_height * m_wide;
+    createBoxGrid();
     if(!save)
     {
-        m_remainBox = m_height * m_wide;
-        createBoxGrid();
         createMines();
     } else {
-        m_remainBox = m_height * m_wide;
-        createBoxGrid();
         loadBoxes();
     }
 
@@ -152,6 +150,7 @@ void BoxGrid::clickRightBox(Box *box)
                            "}");
         ++m_remainFlag;
         ++m_remainBox;
+        emit statusBarUpdate();
     } else if (box->isChecked() || m_remainFlag==0)
     {
         return;
@@ -163,6 +162,7 @@ void BoxGrid::clickRightBox(Box *box)
                            "border-image: url(:/image/image/flag.png) 0 0 0 0 stretch stretch;"
                            "}");
         --m_remainFlag;
+        emit statusBarUpdate();
         if(--m_remainBox==0)
             emit gameEnded("win");
     }

@@ -5,6 +5,7 @@
 #include "boxgrid.h"
 #include "optiondialog.h"
 #include "mysettings.h"
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,10 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     m_boxGrid = new BoxGrid();
     createGrid();
+    createStatusBar();
 }
 
 MainWindow::~MainWindow()
 {
+    delete labelMines;
     delete ui;
 }
 
@@ -31,6 +34,20 @@ void MainWindow::createGrid()
         }
     }
     connect(m_boxGrid,&BoxGrid::gameEnded,this, &MainWindow::endGame);
+}
+
+void MainWindow::createStatusBar()
+{
+    labelMines = new QLabel(this);
+    updateStatusBar();
+    ui->statusbar->addPermanentWidget(labelMines,1);
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusBar);
+}
+
+void MainWindow::updateStatusBar()
+{
+    QString str = QString("Nb mines: %1/%2").arg(m_boxGrid->getNbFlags()).arg(m_boxGrid->getNbMines());
+    labelMines->setText(str);
 }
 
 void MainWindow::endGame(const QString msg)
@@ -91,6 +108,7 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
     m_boxGrid=new BoxGrid(wide,height,mines);
     createGrid();
 }
+
 
 void MainWindow::on_actionSave_triggered()
 {
