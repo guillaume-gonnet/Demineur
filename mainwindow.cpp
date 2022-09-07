@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     createGrid();
     createStatusBar();
     connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+    connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
 }
 
 MainWindow::~MainWindow()
@@ -51,8 +52,7 @@ void MainWindow::createStatusBar()
     connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateStatusTimer);
-    timer->start(1000);
-    updateStatusTimer();
+    labelTimer->setText(time.toString("hh : mm : ss"));
     ui->statusbar->addPermanentWidget(labelTimer,1);
 }
 
@@ -89,11 +89,11 @@ void MainWindow::endGame(const QString msg)
         delete m_boxGrid;
         m_boxGrid=new BoxGrid(wide,height,mines);
         connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+        connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
         createGrid();
         updateStatusMines();
         time = QTime(0,0);
-        timer->start();
-        updateStatusTimer();
+        labelTimer->setText(time.toString("hh : mm : ss"));
         break;
     }
     case QMessageBox::No :
@@ -106,6 +106,8 @@ void MainWindow::on_actionNew_triggered()
     if(m_boxGrid)
         delete m_boxGrid;
     m_boxGrid=new BoxGrid();
+    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+    connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
     createGrid();
 }
 
@@ -128,6 +130,7 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
     delete m_boxGrid;
     m_boxGrid=new BoxGrid(wide,height,mines);
     connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+    connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
     createGrid();
 }
 
@@ -143,5 +146,11 @@ void MainWindow::on_actionLoad_triggered()
     MySettings mySettings;
     m_boxGrid = mySettings.loadSettings();
     connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
+    connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
     createGrid();
+}
+
+void MainWindow::timerStart()
+{
+    timer->start(1000);
 }

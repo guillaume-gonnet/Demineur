@@ -6,7 +6,7 @@
 
 QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 
-BoxGrid::BoxGrid(const int wide, const int height, const int mines, const bool save): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines)
+BoxGrid::BoxGrid(const int wide, const int height, const int mines, const bool save): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines),m_firstClick(true)
 {
     m_remainBox = m_height * m_wide;
     createBoxGrid();
@@ -110,6 +110,11 @@ void BoxGrid::loadBoxes()
 
 void BoxGrid::clickLeftBox(Box* box)
 {
+    if(m_firstClick)
+    {
+        emit timerStart();
+        m_firstClick=false;
+    }
 
     if(box->isChecked())
         return;

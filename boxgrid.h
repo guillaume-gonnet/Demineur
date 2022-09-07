@@ -34,12 +34,14 @@ private:
     int m_mines;
     int m_remainBox;
     int m_remainFlag;
+    bool m_firstClick;
     void createMines();
     void loadBoxes();
 
 signals:
     void gameEnded(const QString);
     void statusBarUpdate();
+    void timerStart();
 };
 
 #endif // BOXGRID_H

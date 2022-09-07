@@ -26,6 +26,7 @@ private slots:
     void on_actionGrid_Size_triggered();
     void on_actionSave_triggered();
     void on_actionLoad_triggered();
+    void timerStart();
 
 private:
     Ui::MainWindow *ui;
