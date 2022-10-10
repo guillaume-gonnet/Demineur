@@ -22,7 +22,6 @@ set(PROJECT_SOURCES
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(demineurExe
-        MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 
@@ -42,20 +41,8 @@ else()
 
 endif()
 
+#target_compile_definitions(semineurExe
+#  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+
+
 target_link_libraries(demineurExe PUBLIC demineur PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
-
-set_target_properties(demineurExe PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
-
-install(TARGETS demineurExe
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(demineurExe)
-endif()

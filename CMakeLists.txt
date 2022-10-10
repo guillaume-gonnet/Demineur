@@ -8,5 +8,5 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 add_subdirectory(demineur)
-add_subdirectory(test)
+add_subdirectory(demineurTest)
 add_subdirectory(demineurExe)

@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <QCoreApplication>
-#include "../../demineur/scorecard.h"
+#include "../demineur/scorecard.h"
 
 class unit_test : public QObject
 {
