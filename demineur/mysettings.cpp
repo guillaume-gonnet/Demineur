@@ -21,9 +21,9 @@ void MySettings::saveSettings(BoxGrid &boxgrid)
         {
             Box *box = boxgrid.getBox(i,j);
             QString str = "";
-            str.append(box->getCoordinates().x);
+            str.append(QString::number(box->getCoordinates().x));
             str.append("-");
-            str.append(box->getCoordinates().y);
+            str.append(QString::number(box->getCoordinates().y));
             settings.setValue(str.append("isChecked"), box->isChecked());
             settings.setValue(str.append("hasMine"), box->hasMine());
             settings.setValue(str.append("hasFlag"), box->hasFlag());
@@ -52,9 +52,9 @@ void MySettings::loadBox(Box *box)
     settings.beginGroup("BoxGrid");
     settings.beginGroup("Box");
     QString str = "";
-    str.append(box->getCoordinates().x);
+    str.append(QString::number(box->getCoordinates().x));
     str.append("-");
-    str.append(box->getCoordinates().y);
+    str.append(QString::number(box->getCoordinates().y));
     bool checked = settings.value(str.append("isChecked")).toBool();
     bool mine = settings.value(str.append("hasMine")).toBool();
     bool flag = settings.value(str.append("hasFlag")).toBool();

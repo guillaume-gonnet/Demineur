@@ -15,7 +15,7 @@ public:
     QString getGridStdSize() const {return m_gridStdSize;};
     QString getName() const {return m_name;};
     int getSec() const {return m_sec;};
-    bool operator ==(const Score &score) {return score.getGridStdSize()==m_gridStdSize && score.getName() == m_name && score.getSec() == m_sec;};
+    bool operator ==(const Score &score) const {return score.getGridStdSize() == m_gridStdSize && score.getName() == m_name && score.getSec() == m_sec;};
 
 private:
     QString m_gridStdSize;

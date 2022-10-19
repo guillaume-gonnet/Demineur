@@ -3,8 +3,6 @@
 #include <QTextStream>
 #include <QDebug>
 
-//TODO: check logique save/load in file
-
 ScoreCard::ScoreCard()
 {
       m_scoreVect = loadScores();
@@ -101,7 +99,7 @@ bool ScoreCard::isDuplicate(QVector<Score> scoreVect, Score score)
 }
 
 //return index of score with highest number of seconds. Return -1 if no score in this gridSize
-int ScoreCard::highestScore(QVector<Score> scoreVect, QString gridStdSize)
+int ScoreCard::highestScore(const QVector<Score> scoreVect, const QString gridStdSize)
 {
     int highestIndex = -1;
     int highestSec = -1;
