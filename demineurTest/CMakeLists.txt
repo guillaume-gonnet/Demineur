@@ -17,7 +17,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(demineurTest tst_unit_test.cpp)
+add_executable(demineurTest tst_unit_test.cpp tst_gui_mainwindow.cpp)
 add_test(NAME demineurTest COMMAND demineurTest)
 
 target_link_libraries(demineurTest PRIVATE Qt${QT_VERSION_MAJOR}::Test demineur)

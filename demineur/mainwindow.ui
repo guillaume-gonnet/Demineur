@@ -56,6 +56,7 @@
      <string>Option</string>
     </property>
     <addaction name="actionGrid_Size"/>
+    <addaction name="actionBest_Scores"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOption"/>
@@ -115,6 +116,11 @@
   <action name="actionGrid_Size">
    <property name="text">
     <string>Grid Size</string>
+   </property>
+  </action>
+  <action name="actionBest_Scores">
+   <property name="text">
+    <string>Best Scores</string>
    </property>
   </action>
  </widget>

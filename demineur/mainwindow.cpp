@@ -5,6 +5,7 @@
 #include "boxgrid.h"
 #include "optiondialog.h"
 #include "mysettings.h"
+#include "scoresdialog.h"
 #include <QLabel>
 #include <QTimer>
 #include <QTime>
@@ -19,10 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_time = QTime(0,0);
     m_scoreCard = new ScoreCard();
     launchGame();
-//    createGrid();
-//    createStatusBar();
-//    connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
-//    connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
 }
 
 MainWindow::~MainWindow()
@@ -147,6 +144,14 @@ void MainWindow::on_actionGrid_Size_triggered()
     connect(p_optDialog,&OptionDialog::accepted,this,&MainWindow::updateOptions);
     optDialog.setModal(true);
     optDialog.exec();
+}
+
+void MainWindow::on_actionBest_Scores_triggered()
+{
+    ScoresDialog *scoresDialog = new ScoresDialog();
+    scoresDialog->setModal(true);
+    scoresDialog->exec();
+    delete scoresDialog;
 }
 
 void MainWindow::updateOptions(const int wide, const int height, const int mines)

@@ -34,7 +34,7 @@ set(PROJECT_SOURCES
         score.h
         score.cpp
         resources.qrc
-	bestscoresframe.h bestscoresframe.cpp bestscoresframe.ui
+        scoresdialog.h scoresdialog.cpp scoresdialog.ui
         ${TS_FILES}
 )
 
