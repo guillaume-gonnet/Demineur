@@ -2,6 +2,8 @@
 #define SCORESDIALOG_H
 
 #include <QDialog>
+#include <QVector>
+#include "score.h"
 
 namespace Ui {
 class ScoresDialog;
@@ -17,7 +19,8 @@ public:
 
 private:
     Ui::ScoresDialog *ui;
-    void fillItems();
+    void fillItems(QVector<Score>);
+    QVector<Score> loadScores(); //duplicate with Scorecard. SHould file interface be in Score?
 };
 
 #endif // SCORESDIALOG_H

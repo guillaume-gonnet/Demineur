@@ -88,7 +88,8 @@ void MainWindow::endGame(const QString msg)
     if(msg=="win")
     {
         msgBox.setText("You win!");
-        Score score = {"Small",m_time.second(),"tmp"};
+        //TODO: add an input box to enter name and define std size of grid
+        Score score = {"Small",m_time.second(),"gg"};
         if(m_scoreCard->isTop10(score))
         {
             m_scoreCard->addScore(score);
