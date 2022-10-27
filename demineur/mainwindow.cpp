@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QTimer>
 #include <QTime>
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -88,10 +89,18 @@ void MainWindow::endGame(const QString msg)
     if(msg=="win")
     {
         msgBox.setText("You win!");
-        //TODO: add an input box to enter name and define std size of grid
-        Score score = {"Small",m_time.second(),"gg"};
+        //TODO: define std size of grid
+
+
+        Score score = {"Small",m_time.second(),"tmp"};
         if(m_scoreCard->isTop10(score))
         {
+            //Open input dialog to get name
+            bool ok;
+            QString name = QInputDialog::getText(this, tr("Enter your name"),
+                                                 tr("You made it in Top 10! Enter your name"), QLineEdit::Normal,
+                                                 "name", &ok);
+            score.setName(name);
             m_scoreCard->addScore(score);
             m_scoreCard->saveScores();
         }

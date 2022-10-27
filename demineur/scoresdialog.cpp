@@ -25,7 +25,8 @@ void ScoresDialog::fillItems(QVector<Score> scoreSet)
     for(int row = 0; row < scoreSet.size() && row <= 10; ++row)
     {
         QTableWidgetItem *name = new QTableWidgetItem(scoreSet[row].getName());
-        QTableWidgetItem *sec = new QTableWidgetItem(QString::number(scoreSet[row].getSec()));
+        QTableWidgetItem *sec = new QTableWidgetItem;
+        sec->setData(Qt::EditRole, scoreSet[row].getSec());
         ui->tableWidget->setItem(row,0,name);
         ui->tableWidget->setItem(row,1,sec);
     }
