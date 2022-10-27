@@ -147,7 +147,22 @@ void MainWindow::on_actionExit_triggered()
     qApp->exit();
 }
 
-void MainWindow::on_actionGrid_Size_triggered()
+void MainWindow::on_actionEasy_triggered()
+{
+    updateOptions(5,5,4);
+}
+
+void MainWindow::on_actionMedium_triggered()
+{
+    updateOptions(10,10,25);
+}
+
+void MainWindow::on_actionHard_triggered()
+{
+    updateOptions(15,15,75);
+}
+
+void MainWindow::on_actionCustom_triggered()
 {
     OptionDialog optDialog(this, m_boxGrid->getWide(),m_boxGrid->getHeight(),m_boxGrid->getNbMines());
     OptionDialog *p_optDialog = &optDialog;
@@ -168,6 +183,7 @@ void MainWindow::updateOptions(const int wide, const int height, const int mines
 {
     delete m_boxGrid;
     m_boxGrid=new BoxGrid(wide,height,mines);
+    updateStatusMines();
     connect(m_boxGrid,&BoxGrid::statusBarUpdate,this,&MainWindow::updateStatusMines);
     connect(m_boxGrid,&BoxGrid::timerStart,this,&MainWindow::timerStart);
     createGrid();

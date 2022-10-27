@@ -63,8 +63,6 @@ void ScoreCard::addScore(Score score)
 
 bool ScoreCard::isTop10(Score score)
 {
-    if(isDuplicate(m_scoreVect, score))
-        return false;
     if(!isTop10Full(m_scoreVect,score.getGridStdSize()))
         return true;
     for(auto s : m_scoreVect)

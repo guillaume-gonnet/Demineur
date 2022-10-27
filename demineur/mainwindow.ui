@@ -55,8 +55,17 @@
     <property name="title">
      <string>Option</string>
     </property>
-    <addaction name="actionGrid_Size"/>
+    <widget class="QMenu" name="menuGrid_Size">
+     <property name="title">
+      <string>Grid Size</string>
+     </property>
+     <addaction name="actionEasy"/>
+     <addaction name="actionMedium"/>
+     <addaction name="actionHard"/>
+     <addaction name="actionCustom"/>
+    </widget>
     <addaction name="actionBest_Scores"/>
+    <addaction name="menuGrid_Size"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOption"/>
@@ -121,6 +130,26 @@
   <action name="actionBest_Scores">
    <property name="text">
     <string>Best Scores</string>
+   </property>
+  </action>
+  <action name="actionEasy">
+   <property name="text">
+    <string>Easy</string>
+   </property>
+  </action>
+  <action name="actionMedium">
+   <property name="text">
+    <string>Medium</string>
+   </property>
+  </action>
+  <action name="actionHard">
+   <property name="text">
+    <string>Hard</string>
+   </property>
+  </action>
+  <action name="actionCustom">
+   <property name="text">
+    <string>Custom</string>
    </property>
   </action>
  </widget>

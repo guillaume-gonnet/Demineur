@@ -25,7 +25,10 @@ public:
 private slots:
     void on_actionNew_triggered();
     void on_actionExit_triggered();
-    void on_actionGrid_Size_triggered();
+    void on_actionHard_triggered();
+    void on_actionMedium_triggered();
+    void on_actionEasy_triggered();
+    void on_actionCustom_triggered();
     void on_actionSave_triggered();
     void on_actionLoad_triggered();
     void on_actionBest_Scores_triggered();
