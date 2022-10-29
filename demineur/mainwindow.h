@@ -49,6 +49,7 @@ private:
     void updateStatusMines();
     void updateStatusTimer();
     void launchGame();
+    QString scoreSize(int wide, int height, int mines);
 
 };
 #endif // MAINWINDOW_H

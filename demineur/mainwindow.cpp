@@ -89,10 +89,8 @@ void MainWindow::endGame(const QString msg)
     if(msg=="win")
     {
         msgBox.setText("You win!");
-        //TODO: define std size of grid
 
-
-        Score score = {"Small",m_time.second(),"tmp"};
+        Score score = {scoreSize(m_boxGrid->getWide(),m_boxGrid->getHeight(),m_boxGrid->getNbMines()),m_time.second(),"tmp"};
         if(m_scoreCard->isTop10(score))
         {
             //Open input dialog to get name
@@ -149,7 +147,7 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionEasy_triggered()
 {
-    updateOptions(5,5,4);
+    updateOptions(5,5,4); //TODO: use enum and and struct to manage 3params together everywhere
 }
 
 void MainWindow::on_actionMedium_triggered()
@@ -169,6 +167,7 @@ void MainWindow::on_actionCustom_triggered()
     connect(p_optDialog,&OptionDialog::accepted,this,&MainWindow::updateOptions);
     optDialog.setModal(true);
     optDialog.exec();
+    delete p_optDialog;
 }
 
 void MainWindow::on_actionBest_Scores_triggered()
@@ -208,4 +207,15 @@ void MainWindow::on_actionLoad_triggered()
 void MainWindow::timerStart()
 {
     m_timer->start(1000);
+}
+
+QString MainWindow::scoreSize(int wide, int height, int mines)
+{
+        if(wide==5 && height==5 && mines==4)
+            return "Small";
+        if(wide==10 && height==10 && mines==25)
+            return "Medium";
+        if(wide==15 && height==15 && mines==75)
+            return "Hard";
+        return "Custom";
 }

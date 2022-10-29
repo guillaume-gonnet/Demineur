@@ -63,6 +63,8 @@ void ScoreCard::addScore(Score score)
 
 bool ScoreCard::isTop10(Score score)
 {
+    if(score.getGridStdSize()=="Custom")
+        return false;
     if(!isTop10Full(m_scoreVect,score.getGridStdSize()))
         return true;
     for(auto s : m_scoreVect)
