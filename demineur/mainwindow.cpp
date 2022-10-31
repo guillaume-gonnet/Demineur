@@ -10,12 +10,22 @@
 #include <QTimer>
 #include <QTime>
 #include <QInputDialog>
+#include <QActionGroup>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //make grid size option box exclusively checkable
+    QActionGroup *levelGroup = new QActionGroup(ui->menuGrid_Size);
+    levelGroup->addAction(ui->actionEasy);
+    levelGroup->addAction(ui->actionMedium);
+    levelGroup->addAction(ui->actionHard);
+    levelGroup->addAction(ui->actionCustom);
+    ui->actionEasy->setChecked(true);
+
     m_boxGrid = new BoxGrid();
     m_timer = new QTimer(this);
     m_time = QTime(0,0);
@@ -95,8 +105,8 @@ void MainWindow::endGame(const QString msg)
         {
             //Open input dialog to get name
             bool ok;
-            QString name = QInputDialog::getText(this, tr("Enter your name"),
-                                                 tr("You made it in Top 10! Enter your name"), QLineEdit::Normal,
+            QString name = QInputDialog::getText(this, "Enter your name",
+                                                 "You made it in Top 10! Enter your name", QLineEdit::Normal,
                                                  "name", &ok);
             score.setName(name);
             m_scoreCard->addScore(score);
