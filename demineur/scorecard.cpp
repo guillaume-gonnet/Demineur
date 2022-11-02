@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QDir>
 
 ScoreCard::ScoreCard()
 {
@@ -10,7 +11,10 @@ ScoreCard::ScoreCard()
 
 QVector<Score> ScoreCard::loadScores()
 {
-  QFile file("scores");
+    QDir home = QDir::home();
+    QString scoreFile = QDir::cleanPath("/home/" + home.dirName() + ("/demineur/scores.txt"));
+    qDebug() << "load scores from " << scoreFile;
+  QFile file(scoreFile);
   if(!file.open(QIODevice::ReadOnly | QFile::Text))
       return {};
   if(file.size()==0)
@@ -34,9 +38,15 @@ QVector<Score> ScoreCard::loadScores()
 
 void ScoreCard::saveScores()
 {
-    QFile file("scores");
+      QDir home = QDir::home();
+//    qDebug() << "directory is " << QDir::cleanPath(home.dirName() + ("/demineur/scores.txt"));
+
+    QString scoreFile = QDir::cleanPath("/home/" + home.dirName() + ("/demineur/scores.txt"));
+    qDebug() << scoreFile;
+    QFile file(scoreFile);
     if(!file.open(QIODevice::WriteOnly | QFile::Text))
-        return; //throw exception
+        //TODO: if doesn't exist, create. If cannot open, throw exception
+        return;
 
     QTextStream out(&file);
     for (auto const &i: m_scoreVect)

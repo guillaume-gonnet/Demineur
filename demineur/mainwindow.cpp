@@ -11,6 +11,7 @@
 #include <QTime>
 #include <QInputDialog>
 #include <QActionGroup>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
