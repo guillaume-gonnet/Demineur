@@ -56,19 +56,27 @@ void ScoreCard::saveScores()
     file.close();
 }
 
+//void ScoreCard::addScore(Score score)
+//{
+//    if(!isTop10Full(m_scoreVect,score.getGridStdSize()))
+//    {
+//        m_scoreVect.append(score);
+//    }
+//    else
+//    {
+//        //NOT WORKING: get index 1 => write unit test
+//        m_scoreVect.removeAt(highestScore(m_scoreVect,score.getGridStdSize()));
+//        m_scoreVect.append(score);
+//    }
+//}
+
 void ScoreCard::addScore(Score score)
 {
-    if(!isTop10Full(m_scoreVect,score.getGridStdSize()))
+    if(isTop10Full(m_scoreVect,score.getGridStdSize()))
     {
-        m_scoreVect.append(score);
-//        m_scoreSet.append({"Small",5,"test"});
+        m_scoreVect.removeAt(highestScore(score.getGridStdSize()));
     }
-    else
-    {
-        //NOT WORKING: get index 1 => write unit test
-        m_scoreVect.removeAt(highestScore(m_scoreVect,score.getGridStdSize()));
-        m_scoreVect.append(score);
-    }
+    m_scoreVect.append(score);
 }
 
 bool ScoreCard::isTop10(Score score)
@@ -109,22 +117,27 @@ bool ScoreCard::isDuplicate(QVector<Score> scoreVect, Score score)
 }
 
 //return index of score with highest number of seconds. Return -1 if no score in this gridSize
-int ScoreCard::highestScore(const QVector<Score> scoreVect, const QString gridStdSize)
+int ScoreCard::highestScore(const QString gridStdSize)
 {
     int highestIndex = -1;
     int highestSec = -1;
     int i=0;
-    for(auto &s : scoreVect)
+    for(auto &s : m_scoreVect)
     {
         if(s.getGridStdSize()==gridStdSize)
         {
             if(s.getSec()>highestSec)
             {
                 highestSec = s.getSec();
-                highestIndex = scoreVect.indexOf(s);
+                highestIndex = m_scoreVect.indexOf(s);
 
             }
         }
     }
     return highestIndex;
+}
+
+void ScoreCard::clearScoreVect()
+{
+    m_scoreVect.clear();
 }

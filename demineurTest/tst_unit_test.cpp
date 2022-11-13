@@ -12,6 +12,7 @@ public:
 
 private slots:
     void test_highestScore();
+    void test_addScore();
 
 private:
     ScoreCard *m_scoreCard;
@@ -21,18 +22,17 @@ private:
 unit_test::unit_test()
 {
     m_scoreCard = new ScoreCard;
-    scoreVect = {
-        {"Small", 2, "gg"},
-        {"Small", 9, "gg"},
-        {"Small", 5, "gg"},
-        {"Small", 20, "gg"},
-        {"Small", 25, "gg"},
-        {"Small", 10, "gg"},
-        {"Small", 10, "tmp"},
-        {"Small", 8, "zzzz"},
-        {"Small", 30, "tmp"},
-        {"Small", 22, "a"},
-    };
+    m_scoreCard->clearScoreVect();
+    m_scoreCard->addScore(Score{"Small", 30, "gg"});
+    m_scoreCard->addScore(Score{"Small", 9, "gg"});
+    m_scoreCard->addScore(Score{"Small", 5, "gg"});
+    m_scoreCard->addScore(Score{"Small", 20, "gg"});
+    m_scoreCard->addScore(Score{"Small", 25, "gg"});
+    m_scoreCard->addScore(Score{"Small", 10, "gg"});
+    m_scoreCard->addScore(Score{"Small", 10, "tmp"});
+    m_scoreCard->addScore(Score{"Small", 8, "zzzz"});
+    m_scoreCard->addScore(Score{"Small", 29, "tmp"});
+    m_scoreCard->addScore(Score{"Small", 22, "a"});
 }
 
 unit_test::~unit_test()
@@ -42,10 +42,16 @@ unit_test::~unit_test()
 
 void unit_test::test_highestScore()
 {
-
     QString gridStdSize = "Small";
-    int index = m_scoreCard->highestScore(scoreVect, gridStdSize);
-    QCOMPARE(index, 8);
+    int index = m_scoreCard->highestScore(gridStdSize);
+    QCOMPARE(m_scoreCard->getScore(index).getSec(), 30);
+}
+
+void unit_test::test_addScore()
+{
+    Score score = {"Small", 6, "test"};
+    m_scoreCard->addScore(score);
+    QCOMPARE(m_scoreCard->getScore(9).getName(),"test");
 }
 
 QTEST_MAIN(unit_test)

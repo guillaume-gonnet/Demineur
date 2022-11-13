@@ -27,7 +27,7 @@ public slots:
     void clickRightBox(Box*);
 
 private:
-    void createBoxGrid();
+    void createBoxGrid(int height, int wide);
     QVector<QVector<Box*>> m_boxList;
     int m_wide;
     int m_height;
@@ -35,8 +35,8 @@ private:
     int m_remainBox;
     int m_remainFlag;
     bool m_firstClick;
-    void createMines();
-    void loadBoxes();
+    void createMines(int height, int wide, int mines);
+    void loadBoxes(QVector<QVector<Box*>> boxList);
 
 signals:
     void gameEnded(const QString);

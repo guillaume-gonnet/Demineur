@@ -9,12 +9,12 @@ QRandomGenerator gene = QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
 BoxGrid::BoxGrid(const int wide, const int height, const int mines, const bool save): m_wide(wide),m_height(height),m_mines(mines),m_remainFlag(mines),m_firstClick(true)
 {
     m_remainBox = m_height * m_wide;
-    createBoxGrid();
+    createBoxGrid(m_height, m_wide);
     if(!save)
     {
-        createMines();
+        createMines(m_height, m_wide, m_mines);
     } else {
-        loadBoxes();
+        loadBoxes(m_boxList);
     }
 
 }
@@ -30,13 +30,13 @@ BoxGrid::~BoxGrid()
     }
 }
 
-void BoxGrid::createBoxGrid()
+void BoxGrid::createBoxGrid(int height, int wide)
 {
-    for(int i=0;i<m_height;i++)
+    for(int i=0;i<height;i++)
     {
         QVector<Box*> tmp;
 
-        for(int j=0;j<m_wide;j++)
+        for(int j=0;j<wide;j++)
         {
             Box *box = new Box();
             box->setCoordinates(i,j);
@@ -49,14 +49,14 @@ void BoxGrid::createBoxGrid()
     emit statusBarUpdate();
 }
 
-void BoxGrid::createMines()
+void BoxGrid::createMines(int height, int wide, int mines)
 {
     QVector<Box::Point> mineGrid;
-    while(mineGrid.size()<m_mines)
+    while(mineGrid.size()<mines)
     {
         Box::Point p;
-        p.x= gene.bounded(m_height);
-        p.y = gene.bounded(m_wide);
+        p.x= gene.bounded(height);
+        p.y = gene.bounded(wide);
         if(std::find(mineGrid.constBegin(), mineGrid.constEnd(), p) == mineGrid.constEnd())
             mineGrid.push_back(p);
     }
@@ -67,17 +67,17 @@ void BoxGrid::createMines()
     }
 }
 
-void BoxGrid::loadBoxes()
+void BoxGrid::loadBoxes(QVector<QVector<Box*>> boxList)
 {
     MySettings mySettings;
-    for(auto boxArr : m_boxList)
+    for(auto boxArr : boxList)
     {
         for(auto box : boxArr)
         {
             mySettings.loadBox(box);
         }
     }
-    for(auto boxArr : m_boxList)
+    for(auto boxArr : boxList)
     {
         for(auto box : boxArr)
         {

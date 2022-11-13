@@ -12,9 +12,13 @@
 
 //void TestGuiMainWindow::testGuiMainWindow()
 //{
-//    MainWindow mainWindow;
+//    QApplication a;
+//    MainWindow w;
+//    w.show();
 
-//    QTest::keyClicks(&lineEdit, "hello world");
+//    //QTest::keyClicks(&lineEdit, "hello world");
 
-//    QCOMPARE(lineEdit.text(), QString("hello world"));
+//    //QCOMPARE(lineEdit.text(), QString("hello world"));
+
+//    return a.exec();
 //}

@@ -12,8 +12,10 @@ class ScoreCard
         QVector<Score> loadScores();
         void saveScores();
         void addScore(const Score);
+        Score getScore(int index) {return m_scoreVect.at(index);};
         bool isTop10(const Score);
-        int highestScore(const QVector<Score>, const QString gridStdSize);
+        int highestScore(const QString gridStdSize);
+        void clearScoreVect();
 
     private:
         QVector<Score> m_scoreVect;

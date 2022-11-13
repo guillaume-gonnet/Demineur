@@ -40,7 +40,6 @@ BoxGrid* MySettings::loadSettings()
     int wide = settings.value("wide").toInt();
     int height = settings.value("height").toInt();
     int mines = settings.value("wide").toInt();
-    settings.endGroup(); //Box
     settings.endGroup(); //BoxGrid
     BoxGrid *boxgrid = new BoxGrid(wide, height,mines,true);
     return boxgrid;
